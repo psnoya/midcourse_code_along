@@ -10,12 +10,12 @@ class GHSearch extends Component {
   }
 
   setInputValue(event) {
-    this.setState({searchValue: event.input.value})
+    this.setState({searchValue: event.target.value})
 
   }
   
   async performanceSearch(event) {
-    let q = this.state.searchValue
+    const q = this.state.searchValue
     let response = await axios.get('http://api.github.com/search/users?q=${q}')
     this.setState({gitHubUsers: response.data.items})
   }
