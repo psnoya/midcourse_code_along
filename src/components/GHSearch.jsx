@@ -10,7 +10,7 @@ class GHSearch extends Component {
   }
 
   setInputValue(event) {
-    this.setState({searchValue: event.target.value})
+    this.setState({searchValue: event.input.value})
 
   }
   
