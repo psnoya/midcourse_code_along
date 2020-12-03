@@ -16,25 +16,33 @@ class GHSearch extends Component {
   
   async performanceSearch(event) {
     let q = this.state.searchValue
-    let response = await axios.get('http://api.github.com/search/users?q=$')
+    let response = await axios.get('http://api.github.com/search/users?q=${q}')
     this.setState({gitHubUsers: response.data.items})
   }
   render() {
-    
+    let displayUsers = this.state.gitHubUsers.map(user=>{
+      return (
+        <li key={user.id}>{user.login}
+
+        </li>
+      )
+    })
     return (
       <>
         <Input 
         type="text" 
         data-cy="search_input" 
         placeholder="Input GH username"
-        onChnge={event => this.setInputValue()}/>
+        onChange={event => this.setInputValue()}/>
       <Button 
       onClick={(event)=> this.performanceSearch()}
         data-cy="search_button">
         Search
       </Button>
       <div data-cy='search_results'>
-        
+        <ul>
+          {displayUsers}
+        </ul>
       </div>
 
       </>
@@ -61,4 +69,4 @@ class GHSearch extends Component {
 //   )
 // }
 
-// export default GHSearch
+export default GHSearch
